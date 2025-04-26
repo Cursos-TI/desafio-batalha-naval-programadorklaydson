@@ -36,13 +36,43 @@ int main() {
     // 1 1 1 1 1
     // 0 0 1 0 0
 
-    char linha[10]={'A','B','C','D','E','F','G','H','I','J'};
-    
-    // CRIANDO O TABULEIRO NAVAL
+    // cadastrando as variaveis.
 
-    int tabuleiro[10][10];
-    for (int 1 = 0; i <10; i++){
-        printf("%s\n",&linha);
+    int matriz[10][10];
+    char colunas[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+    int i, j;
+
+    // programando as matrizes "i" e "j".
+    for (i = 0; i < 10; i++) {
+        for (j = 0; j < 10; j++) {
+            matriz[i][j] = 0;
+        }
+    }
+
+     // Coloquei um navio na horizontal (linha 5, colunas D, E, F).
+     matriz[4][3] = 3;
+     matriz[4][4] = 3;
+     matriz[4][5] = 3;
+ 
+     // Coloquei um navio na vertical (coluna C, linhas 7, 8, 9).
+     matriz[6][2] = 3;
+     matriz[7][2] = 3;
+     matriz[8][2] = 3;
+
+    // Imprimir a linha das letras de "a" ate "j".
+    printf("    ");
+    for (i = 0; i < 10; i++) {
+        printf("%c ", colunas[i]);
+    }
+    printf("\n");
+
+    // Imprimir a matriz
+    for (i = 0; i < 10; i++) {
+        printf("%2d  ", i + 1);
+        for (j = 0; j < 10; j++) {
+            printf("%d ", matriz[i][j]);
+        }
+        printf("\n");
     }
 
     return 0;
