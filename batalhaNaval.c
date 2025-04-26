@@ -36,5 +36,14 @@ int main() {
     // 1 1 1 1 1
     // 0 0 1 0 0
 
+    char linha[10]={'A','B','C','D','E','F','G','H','I','J'};
+    
+    // CRIANDO O TABULEIRO NAVAL
+
+    int tabuleiro[10][10];
+    for (int 1 = 0; i <10; i++){
+        printf("%s\n",&linha);
+    }
+
     return 0;
 }
