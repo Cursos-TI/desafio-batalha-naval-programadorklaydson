@@ -35,48 +35,77 @@
     // 0 0 1 0 0
 
     
-    #include <stdio.h>
-    #include <stdlib.h> // Para usar abs()
-
-    // cadastrando as variaveis.
+#include <stdio.h>
+#include <stdlib.h>
 
 int main() {
     int matriz[10][10];
     char colunas[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
     int i, j;
 
-    // cadastrando a matriz.
-
+    // Inicializar a matriz com zeros
     for (i = 0; i < 10; i++) {
         for (j = 0; j < 10; j++) {
             matriz[i][j] = 0;
         }
     }
 
-    // posições dos navios.
+    //  POSICOES DOS NAVIOS:
 
-    // Navio na horizontal (linha 5, colunas D, E, F)
-    matriz[4][3] = 3;
-    matriz[4][4] = 3;
-    matriz[4][5] = 3;
-
-    // Navio na vertical (coluna C, linhas 7, 8, 9)
-    matriz[6][2] = 3;
-    matriz[7][2] = 3;
-    matriz[8][2] = 3;
-
-    // Navio na diagonal principal (posição: (0,0), (1,1), (2,2))
+    // Horizontal:
     matriz[0][0] = 3;
-    matriz[1][1] = 3;
-    matriz[2][2] = 3;
+    matriz[0][1] = 3;
+    matriz[0][2] = 3;
 
-    // Navio na diagonal secundária (posição: (0,9), (1,8), (2,7))
-    matriz[0][9] = 3;
-    matriz[1][8] = 3;
-    matriz[2][7] = 3;
+    // Vertical:
+    matriz[1][3] = 3;
+    matriz[2][3] = 3;
+    matriz[3][3] = 3;
 
-    // resultado do tabulheiro.
+    // Diagonal principal (↘):
+    matriz[3][0] = 3;
+    matriz[4][1] = 3;
+    matriz[5][2] = 3;
 
+    // Diagonal secundária (↙):
+    matriz[6][4] = 3;
+    matriz[5][5] = 3;
+    matriz[4][6] = 3;
+
+    // Habilidade 1: Cone
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 5; j++) {
+            int linha = 7 + i;
+            int coluna = j;
+            if (j >= (2 - i) && j <= (2 + i) && matriz[linha][coluna] != 3) {
+                matriz[linha][coluna] = 1;
+            }
+        }
+    }
+
+    // Habilidade 2: Cruz
+    for (i = 0; i < 5; i++) {
+        for (j = 0; j < 5; j++) {
+            int linha = i;
+            int coluna = 5 + j;
+            if ((i == 2 || j == 2) && matriz[linha][coluna] != 3) {
+                matriz[linha][coluna] = 1;
+            }
+        }
+    }
+
+    // Habilidade 3: Octaedro
+    for (i = 0; i < 5; i++) {
+        for (j = 0; j < 5; j++) {
+            int linha = 5 + i;
+            int coluna = 4 + j;  // Mover uma coluna para a esquerda
+            if (abs(i - 2) + abs(j - 2) <= 2 && matriz[linha][coluna] != 3) {
+                matriz[linha][coluna] = 1;
+            }
+        }
+    }
+
+    // Imprimir matriz
     printf("    ");
     for (i = 0; i < 10; i++) {
         printf("%c ", colunas[i]);
@@ -87,70 +116,6 @@ int main() {
         printf("%2d  ", i + 1);
         for (j = 0; j < 10; j++) {
             printf("%d ", matriz[i][j]);
-        }
-        printf("\n");
-    }
-
-    // abilidades especiais.
-
-    int habilidade[5][5];
-
-    // Cone:
-
-    for (i = 0; i < 5; i++) {
-        for (j = 0; j < 5; j++) {
-            if (j >= (2 - i) && j <= (2 + i)) {
-                habilidade[i][j] = 1;
-            } else {
-                habilidade[i][j] = 0;
-            }
-        }
-    }
-
-    printf("\nHabilidade: Cone\n");
-    for (i = 0; i < 5; i++) {
-        for (j = 0; j < 5; j++) {
-            printf("%d ", habilidade[i][j]);
-        }
-        printf("\n");
-    }
-
-    // Cruz:
-
-    for (i = 0; i < 5; i++) {
-        for (j = 0; j < 5; j++) {
-            if (i == 2 || j == 2) {
-                habilidade[i][j] = 1;
-            } else {
-                habilidade[i][j] = 0;
-            }
-        }
-    }
-
-    printf("\nHabilidade: Cruz\n");
-    for (i = 0; i < 5; i++) {
-        for (j = 0; j < 5; j++) {
-            printf("%d ", habilidade[i][j]);
-        }
-        printf("\n");
-    }
-
-    // Octaedro:
-
-    for (i = 0; i < 5; i++) {
-        for (j = 0; j < 5; j++) {
-            if (abs(i - 2) + abs(j - 2) <= 2) {
-                habilidade[i][j] = 1;
-            } else {
-                habilidade[i][j] = 0;
-            }
-        }
-    }
-
-    printf("\nHabilidade: Octaedro\n");
-    for (i = 0; i < 5; i++) {
-        for (j = 0; j < 5; j++) {
-            printf("%d ", habilidade[i][j]);
         }
         printf("\n");
     }
